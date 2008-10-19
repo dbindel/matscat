@@ -1,0 +1,140 @@
+\documentclass{article}
+\usepackage{amsmath,amssymb}
+
+\newcommand{\schrodinger}{Schr\"{o}dinger}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbC}{\mathbb{C}}
+
+\begin{document}
+
+These notes describe some aspects of potential scattering on the real line
+and how scattering coefficients, scattered wave functions, and resonances.
+
+\section{Background}
+
+We consider the one-dimensional time-independent \schrodinger\ equation
+\begin{equation}
+  H \psi = E \psi
+  \label{basic-schrodinger}
+\end{equation}
+where
+\begin{equation}
+  H = -\frac{d^2}{dx^2} + V(x).
+\end{equation}
+For these notes, we will assume the potential $V$ is piecewise
+continuous and has compact support contained within some interval
+$[a,b]$.  For discrete values of $E$ in $(-\infty,0)$, there are
+nontrivial solutions to (\ref{basic-schrodinger}) in $L^2(\bbR)$;
+these are the \emph{bound states}.  In addition to the bound states,
+(\ref{basic-schrodinger}) admits solutions in $L^{\infty}$ for $E \in
+[0,\infty)$; the properties of these \emph{unbound states} are our
+main concern.
+
+For any $E \in \bbC$, (\ref{basic-schrodinger}) has a two-dimensional
+space of (weakly) twice-differentiable solutions.  If we write $k^2 =
+-E$, then we have
+\begin{equation}
+  \psi(x) = \left\{
+    \begin{array}{ll}
+    A_l \exp(ikx) + A_r \exp(-ikx), & \mbox{ for } x < a \\
+    B_l \exp(ikx) + B_r \exp(-ikx), & \mbox{ for } x > b \\
+    \end{array}
+  \right.
+\end{equation}
+When $k$ is on the positive real axis, $A_l$ and $B_l$ are the magnitudes
+of the left-traveling part of the wave in the regions outside the potential,
+while $A_r$ and $B_r$ are the magnitudes of the right-traveling waves.
+Alternately, we can view $A_r$ and $B_l$ as the incoming wave magnitudes,
+and $A_l$ and $B_r$ the outgoing wave magnitudes.  The incoming wave
+components are related to the outgoing wave components by the
+scattering matrix $S(k)$:
+\begin{equation}
+  \begin{bmatrix} A_l \\ B_r \end{bmatrix} =
+  S(k)
+  \begin{bmatrix} A_r \\ B_l \end{bmatrix}.
+\end{equation}
+
+For $k$ on the positive real line, $S(k)$ can be interpreted as a
+relation between incoming waves and outgoing waves.  It is a unitary
+matrix whose entries can be assigned physical meanings: $S_{11}(k)$
+and $S_{12}(k)$ are the amplitude of the reflected and transmitted
+waves, respectively, in response to an incoming wave from $-\infty$;
+while $S_{22}(k)$ and $S_{21}(k)$ give the amplitude of the reflected
+and transmitted waves in response to a wave from $+\infty$.  For most
+$k \in \bbC$, $S(k)$ is well-defined and analytic with respect to $k$,
+though for non-real $k$ the matrix will not be unitary and the
+physical interpretation of the coefficients is questionable.  However,
+the singularities of $S(k)$ in the complex plane provide useful
+information about the behavior of $S(k)$.  In the upper half plane
+$\Im(k) \geq 0$, $S(k)$ may only have poles along the imaginary axis;
+these correspond to bound state energies for the \schrodinger\
+equation (\ref{basic-schrodinger}).  The poles of $S(k)$ in the lower
+half plane are known as resonance poles.
+
+% I'm confuseed now why Maciej was confused that there should be
+% spikes in the transmission coefficient near resonances.  There
+% should certainly be *some* rapid variation in behavior at those
+% points; I'm not sure I see why the variation should always be a
+% spike in the reflection coefficient or in the transmission
+% coefficient.
+
+For $\lambda^2 = E > 0$, solutions to (\ref{basic-schrodinger}) satisfy
+\begin{eqnarray*}
+  \psi(x) & = & A_{-} e^{i \lambda x} + B_{-} e^{-i \lambda x}, \;
+    x \in (-\infty,a] \\
+  \psi(x) & = & A_{+} e^{i \lambda x} + B_{+} e^{-i \lambda x}, \;
+    x \in [b,\infty)
+\end{eqnarray*}
+The solution components proportional to $e^{-i \lambda x}$ correspond
+to right-traveling waves in the time-dependent equations, while the
+solution components proportional to $e^{i \lambda x}$ correspond to
+left-traveling waves.  In general, we can freely choose any two of the
+coefficients $A_{-}$, $A_{+}$, $B_{-}$, and $B_{+}$; the remaining two
+coefficients are then determined by the constraint that $\psi$ satisfies
+the \schrodinger\ equation.  For scattering calculations, we typically
+choose the incoming wave coefficients $B_{-}$ and $A_{+}$, and from them
+compute the outgoing wave coefficients $A_{-}$ and $B_{+}$.  The
+\emph{scattering matrix} $S(\lambda)$ relates the two sets of coefficients:
+\begin{equation}
+  \begin{bmatrix} A_{-} \\ B_{+} \end{bmatrix} = 
+  S(\lambda)
+  \begin{bmatrix} B_{-} \\ A_{+} \end{bmatrix}.
+\end{equation}
+
+When a right-traveling plane wave interacts with the potential on $[a,b]$,
+some of that plane wave will be reflected and some will be transmitted.
+To describe this interaction, we compute the reflected wave coefficient
+$A_{-}$ and the transmitted wave coefficient $B_{+}$ given an incident
+wave of unit magnitude from $-\infty$ (i.e. $B_{-} = 1$) and no wave
+from $+\infty$ (i.e. $A_{+} = 0$).  The reflected 
+
+
+% The differential equation
+% Scattering of a plane wave
+% Homogeneous solutions
+% Bound states and resonance poles
+
+% We consider the one-dimensional time-harmonic \schrodinger\ equation 
+% \begin{equation}
+%   \left( -frac{d^2}{dx^2} + V(x) - \lambda^2 \right) \psi = 0,
+% \end{equation}
+% where $V$ is supported in a bounded interval $[a,b]$.  
+
+% \begin{equation}
+%   H_0 = -\frac{d}{dx^2}
+% \end{equation}
+
+% \begin{equation}
+%   H = H_0 + V(x)
+% \end{equation}
+
+% \begin{equation}
+%   (H_0 - \lambda^2) \psi_0 = 0
+% \end{equation}
+
+% \begin{equation}
+  
+% \end{equation}
+
+\end{document}

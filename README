@@ -1,0 +1,120 @@
+Introduction
+---
+
+MATSCAT is a collection of MATLAB codes to compute resonance poles and
+scattering of plane waves for the one-dimensional Schrodinger operator
+
+  H = -D^2 + V(x)
+
+where D = d/dx and the potential V is supported within some interval [a,b].
+Rather than analyzing H-E directly, we define E = l^2 and solve the reduced
+equations
+
+  ( -D^2 + V - l^2 ) u = f  on  (a,b)
+         ( D - i*l ) u = 0  at  x = a
+         ( D + i*l ) u = 0  at  x = b.
+
+To compute scattering of a plane wave phi_0(x) = exp(i*l*x), we 
+solve phi_s satisfying the reduced equations with
+
+  f = -H phi_0 = -V exp(i*l*x)
+
+The eigenvalues of the reduced system correspond to eigenvalues and resonance
+poles of the original system.  For values of z in the right half plane
+(the physical half plane), solutions to the reduced equations decay in the
+far field, and eigenvalues of the reduced system correspond to true eigenvalues
+of the original problem for which there are L^2 eigenfunctions.  For values
+of z in the left half plane, eigenvalues of the reduced system correspond to
+resonance poles.
+
+
+Examples
+---
+
+The script demo.m shows several examples of the code in action for a
+square-well potential.  These examples are also described on the MATSCAT
+web page.
+
+
+Numerical methods
+---
+
+We discretize the reduced system by (possibly) subdividing the (a,b) into
+sub-intervals and using a Chebyshev spectral collocation method on each
+sub-interval.  The solutions are connected between intervals by matching
+conditions that enforce C^1 continuity of the global solution; on the
+end intervals, we enforce the radiation boundary condition.  This leads to
+a matrix equation of the form
+
+  (K0 + 1i*l*K1 + -l^2*K2) u = f
+
+where
+
+  K0 includes: -D^2 + V on the interior of the sub-intervals
+               the inter-element matching conditions
+               the derivative part of the radiation conditions
+
+  K1 includes: a contribution to the radiation conditions
+
+  K2 includes: the identity on interior of sub-intervals
+
+K0 is nonsingular, but K2 has zero rows corresponding to the constraint
+equations, and K1 only has two nonzeros in total.
+
+To compute eigenvalues and resonances, we solve the generalized linear
+eigenvalue problem
+
+  (A-z*B)*v = 0
+
+for l = i*z, where
+
+  A = [ K0, 0;
+         0, I ];
+
+  B = [ -K1, -K2
+          I,   0 ];
+
+  v = [   u; 
+        z*u ].
+
+
+Routines
+---
+
+Use the MATLAB "help" command to get more details on how to use each of
+these routines.
+
+Examples:
+  demo        -- run all demonstration scripts
+  demo_square -- examples for square-well potentials
+  demo_trap   -- a more complicated piecewise-constant well
+  demo_spline -- some examples for a problem defined by a spline
+  demo_gauss  -- resonances for a Gaussian potential
+  demo_H0     -- illustrates the behavior when V = 0
+
+Problem set-up:
+  spline_well -- Define a potential in terms of spline data
+  square_well -- Define a piecewise-constant potential
+  func_well   -- Define a potential in terms of a MATLAB function handle
+
+Computational routines:
+  checked_resonances -- Compute eigenvalues with two different mesh densities
+                        and return those which appear to be converged
+  compute_resonances -- Compute eigenvalues
+  compute_scatter    -- Compute the scattering of a plane wave from -inf
+
+Output routines:
+  plot_potential -- Plot the potential
+  plot_resonance -- Plot the potential together with a plot of any eigenvalues
+                    in the z-plane which change by no more than 1e-6 upon
+                    mesh refinement
+  animate_wave   -- Show an animation of Re(exp(i*t)*u), where u is computed
+                    using compute_scatter
+
+Support routines:
+  plot_fields    -- Plot a function defined on the mesh
+  compare_eigs   -- Compare two sets of eigenvalues to check convergence
+  form_operators -- Get discrete operators K0, K1, K2
+  plane_forcing  -- Compute the forcing vector for plane-wave scattering
+  problem_size   -- Compute the problem size from a mesh description
+
