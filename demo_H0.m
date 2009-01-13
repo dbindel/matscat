@@ -13,6 +13,6 @@ l1 = compute_resonances(elt);
 l2 = checked_resonances2(elt);
 
 clf;
-plot(real(l1), imag(l1), 'b.'); hold on
-plot(real(l2), imag(l2), 'ro');
+h1 = plot(real(l1), imag(l1), 'b.'); hold on
+h2 = plot(real(l2), imag(l2), 'ro');
 legend('All eigenvalues', 'Checked eigenvalues');

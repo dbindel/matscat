@@ -17,6 +17,7 @@ for a = 0.1:0.1:3
     mm = [mm, 1i*nu - 1i*(k-1)];
   end
   plot(mm,'or')
+  axis([-4, 4, -3, -0]);
   pause(0.5);
   hold off
 end
