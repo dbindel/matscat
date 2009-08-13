@@ -1,6 +1,6 @@
 % [l] = checked_resonances2(elt,neigs,tol)
 %
-% Compute resonances with two densities in order to check convergence.
+% Compute resonances with error estimate in order to check convergence.
 % If the same answer occurs to within tol, accept the pole as converged.
 % Inputs:
 %   elt   - coarse mesh
